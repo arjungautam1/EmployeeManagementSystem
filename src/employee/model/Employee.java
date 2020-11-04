@@ -1,12 +1,13 @@
 package employee.model;
 
-public class User {
+//Model class for Employee
+public class Employee {
 	private int id;
 	private String name;
 	private String email;
 	private String country;
 
-	public User(int id, String name, String email, String country) {
+	public Employee(int id, String name, String email, String country) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -14,7 +15,7 @@ public class User {
 		this.country = country;
 	}
 
-	public User(String name, String email, String country) {
+	public Employee(String name, String email, String country) {
 		super();
 		this.name = name;
 		this.email = email;
