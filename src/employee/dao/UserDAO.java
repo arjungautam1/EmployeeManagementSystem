@@ -84,37 +84,38 @@ public class UserDAO {
     }
 
     //Select all employees
-    public List<Employee> selectAllEmployees(){
-        List<Employee> employees=new ArrayList<>();
+    public List<Employee> selectAllEmployees() {
+        List<Employee> employees = new ArrayList<>();
 
-        try(Connection connection=getConnection();
+        try (Connection connection = getConnection();
 
-            PreparedStatement preparedStatement=connection.prepareStatement(SELECT_ALL_EMPLOYEE);
-        ){
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMPLOYEE);
+        ) {
             System.out.println(preparedStatement);
-            ResultSet rs=preparedStatement.executeQuery();
-            while (rs.next()){
-                int id=rs.getInt("id");
-                String name=rs.getString("name");
-                String email=rs.getString("email");
-                String country=rs.getString("country");
-                employees.add(new Employee(id,name,email,country));
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                employees.add(new Employee(id, name, email, country));
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return employees;
     }
 
     //Delete employees
-    public boolean deleteEmployee(int id) throws SQLException{
+    public boolean deleteEmployee(int id) throws SQLException {
         boolean rowDeleted;
-        try(Connection connection=getConnection();
-        PreparedStatement preparedStatement=connection.prepareStatement(DELETE_EMPLOYEE_SQL);
-        ){
-            return rowDeleted;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE_SQL);
+        ) {
+            preparedStatement.setInt(1, id);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
         }
+        return rowDeleted;
     }
 
     //Update Employee
@@ -126,10 +127,8 @@ public class UserDAO {
             preparedStatement.setString(2, employee.getEmail());
             preparedStatement.setString(3, employee.getCountry());
 
-            preparedStatement.executeUpdate();
+            rowUpdated = preparedStatement.executeUpdate() > 0;
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return rowUpdated;
 
