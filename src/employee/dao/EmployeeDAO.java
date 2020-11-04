@@ -7,7 +7,7 @@ import java.util.List;
 import employee.model.Employee;
 
 //This class is used for CRUD database operations for the table users in the database. 
-public class UserDAO {
+public class EmployeeDAO {
 
     private String jdbcURL = "jdbc:mysql://localhost:3306/employee?useSSL=false";
     private String jdbcUsername = "root";
