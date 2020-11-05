@@ -9,23 +9,26 @@ import employee.model.Employee;
 //This class is used for CRUD database operations for the table users in the database. 
 public class EmployeeDAO {
 
-    private String jdbcURL = "jdbc:mysql://localhost:3306/employee?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/emp_management_sys?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "root";
+    private String jdbcPassword = "";
 
     private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee" + "(name,email,country) VALUES "
             + "(?,?,?);";
-    private static final String SELECT_EMPLOYEE_BY_ID = "SELECT id ,name,email,country FROM user WHERE id=?";
-    private static final String SELECT_ALL_EMPLOYEE = "SELELT * FROM employee";
+    private static final String SELECT_EMPLOYEE_BY_ID = "SELECT id ,name,email,country FROM employee WHERE id=?";
+    private static final String SELECT_ALL_EMPLOYEE = "SELECT * FROM employee";
     private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE id=?;";
     private static final String UPDATE_EMPLOYEES_SQL = "UPDATE employee set name=?, email=? , country =? where id=?;";
 
+    public EmployeeDAO() {
+    	
+    }
     // Common method for jdbc connection
     protected Connection getConnection() {
 
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,12 +41,15 @@ public class EmployeeDAO {
 
     // Insert Employee
     public void insertEmployee(Employee employee) throws SQLException {
+    	System.out.println(INSERT_EMPLOYEE_SQL);
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEE_SQL)) {
 
             preparedStatement.setString(1, employee.getName());
             preparedStatement.setString(2, employee.getEmail());
             preparedStatement.setString(3, employee.getCountry());
+            
+            System.out.println(preparedStatement);
 
             preparedStatement.executeUpdate();
 
@@ -85,6 +91,7 @@ public class EmployeeDAO {
 
     //Select all employees
     public List<Employee> selectAllEmployees() {
+    	
         List<Employee> employees = new ArrayList<>();
 
         try (Connection connection = getConnection();
@@ -126,6 +133,7 @@ public class EmployeeDAO {
             preparedStatement.setString(1, employee.getName());
             preparedStatement.setString(2, employee.getEmail());
             preparedStatement.setString(3, employee.getCountry());
+            preparedStatement.setInt(4, employee.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
 

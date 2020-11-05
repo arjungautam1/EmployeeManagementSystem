@@ -23,18 +23,23 @@ public class EmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private EmployeeDAO employeeDAO;
+    
+    public void init() {
+    	employeeDAO=new EmployeeDAO();
+    }
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeeServlet() {
-        this.employeeDAO = new EmployeeDAO();
-    }
+    
+//    public EmployeeServlet() {
+//        this.employeeDAO = new EmployeeDAO();
+//    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        this.doGet(request, response);
+       doGet(request, response);
 
     }
 
