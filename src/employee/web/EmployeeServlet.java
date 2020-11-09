@@ -117,7 +117,8 @@ public class EmployeeServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        Employee newEmployee = new Employee(name, email, country);
+        String role=request.getParameter("role");
+        Employee newEmployee = new Employee(name, email, country,role);
         employeeDAO.insertEmployee(newEmployee);
         response.sendRedirect("list");
     }
@@ -128,8 +129,9 @@ public class EmployeeServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
+        String role=request.getParameter("role");
 
-        Employee book = new Employee(id, name, email, country);
+        Employee book = new Employee(id, name, email, country,role);
         employeeDAO.updateEmployee(book);
         response.sendRedirect("list");
     }

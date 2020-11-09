@@ -6,20 +6,22 @@ public class Employee {
 	private String name;
 	private String email;
 	private String country;
-
-	public Employee(int id, String name, String email, String country) {
+	private String role;
+	public Employee(int id, String name, String email, String country,String role) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.country = country;
+		this.role=role;
 	}
 
-	public Employee(String name, String email, String country) {
+	public Employee(String name, String email, String country,String role) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.country = country;
+		this.role=role;
 	}
 
 	public int getId() {
@@ -52,6 +54,13 @@ public class Employee {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role=role;
 	}
 
 }

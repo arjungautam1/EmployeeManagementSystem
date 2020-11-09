@@ -13,12 +13,12 @@ public class EmployeeDAO {
     private String jdbcUsername = "root";
     private String jdbcPassword = "";
 
-    private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee" + "(name,email,country) VALUES "
-            + "(?,?,?);";
-    private static final String SELECT_EMPLOYEE_BY_ID = "SELECT id ,name,email,country FROM employee WHERE id=?";
+    private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee" + "(name,email,country,role) VALUES "
+            + "(?,?,?,?);";
+    private static final String SELECT_EMPLOYEE_BY_ID = "SELECT id ,name,email,country,role FROM employee WHERE id=?";
     private static final String SELECT_ALL_EMPLOYEE = "SELECT * FROM employee";
     private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE id=?;";
-    private static final String UPDATE_EMPLOYEES_SQL = "UPDATE employee set name=?, email=? , country =? where id=?;";
+    private static final String UPDATE_EMPLOYEES_SQL = "UPDATE employee set name=?, email=? , country =?,role=? where id=?;";
 
     public EmployeeDAO() {
     	
@@ -48,6 +48,7 @@ public class EmployeeDAO {
             preparedStatement.setString(1, employee.getName());
             preparedStatement.setString(2, employee.getEmail());
             preparedStatement.setString(3, employee.getCountry());
+            preparedStatement.setString(4, employee.getRole());
             
             System.out.println(preparedStatement);
 
@@ -80,7 +81,8 @@ public class EmployeeDAO {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String country = rs.getString("country");
-                employee = new Employee(id, name, email, country);
+                String role=rs.getString("role");
+                employee = new Employee(id, name, email, country,role);
             }
 
         } catch (SQLException e) {
@@ -105,7 +107,8 @@ public class EmployeeDAO {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String country = rs.getString("country");
-                employees.add(new Employee(id, name, email, country));
+                String role=rs.getString("role");
+                employees.add(new Employee(id, name, email, country,role));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,7 +136,8 @@ public class EmployeeDAO {
             preparedStatement.setString(1, employee.getName());
             preparedStatement.setString(2, employee.getEmail());
             preparedStatement.setString(3, employee.getCountry());
-            preparedStatement.setInt(4, employee.getId());
+            preparedStatement.setString(4, employee.getRole());
+            preparedStatement.setInt(5, employee.getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
 

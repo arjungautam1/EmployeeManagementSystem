@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Details</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -47,6 +47,7 @@
 						<th>Name</th>
 						<th>Email</th>
 						<th>Country</th>
+						<th>Role</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -59,6 +60,7 @@
 							<td><c:out value="${employee.name}" /></td>
 							<td><c:out value="${employee.email}" /></td>
 							<td><c:out value="${employee.country}" /></td>
+							<td><c:out value="${employee.role }"/></td>
 							<td><a href="edit?id=<c:out value='${employee.id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
 								href="delete?id=<c:out value='${employee.id}' />">Delete</a></td>

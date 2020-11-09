@@ -59,7 +59,7 @@
 				</fieldset>
 
 				<fieldset class="form-group">
-					<label>Employee Email</label> <input type="text"
+					<label>Employee Email</label> <input type="email"
 						value="<c:out value='${employee.email}' />" class="form-control"
 						name="email">
 				</fieldset>
@@ -68,6 +68,12 @@
 					<label>Employee Country</label> <input type="text"
 						value="<c:out value='${employee.country}' />" class="form-control"
 						name="country">
+				</fieldset>
+
+				<fieldset class="form-group">
+					<label>Employee Role</label> <input type="text"
+						value="<c:out value='${employee.role}' />" class="form-control"
+						name="role">
 				</fieldset>
 
 				<button type="submit" class="btn btn-success">Save</button>
