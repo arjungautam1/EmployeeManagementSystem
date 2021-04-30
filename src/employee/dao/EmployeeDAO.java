@@ -19,7 +19,8 @@ public class EmployeeDAO {
     private static final String SELECT_ALL_EMPLOYEE = "SELECT * FROM employee";
     private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE id=?;";
     private static final String UPDATE_EMPLOYEES_SQL = "UPDATE employee set name=?, email=? , country =?,role=? where id=?;";
-
+   
+    
     public EmployeeDAO() {
     	
     }
@@ -38,7 +39,7 @@ public class EmployeeDAO {
 
         return connection;
     }
-
+   
     // Insert Employee
     public void insertEmployee(Employee employee) throws SQLException {
     	System.out.println(INSERT_EMPLOYEE_SQL);
